@@ -11,11 +11,11 @@ import Cells.View exposing (..)
 view : Model -> Html Msg
 view model =
   div
-  []
+  [class "container"]
   (List.map renderRow model.cells)
 
 renderRow : List CellModel -> Html Msg
 renderRow cells =
   div
-  []
+  [class "row"]
   (List.map (cellView >> Html.App.map (always NoOp)) cells)
