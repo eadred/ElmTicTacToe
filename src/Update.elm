@@ -9,6 +9,7 @@ import Cells.Models exposing (..)
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
+    Reset -> ( initialState, Cmd.none )
     CellMsg rowIdx colIdx cellMsg ->
       case (cellMsg, model.gameState) of
         (BeginTurn, InProgress currentTurn) ->

@@ -11,3 +11,10 @@ type alias Model =
 type GameState =
   InProgress Player
   | Finished
+
+initialState : Model
+initialState =
+  {
+    cells = List.repeat 3 (List.repeat 3 initEmpty)
+  , gameState = InProgress X
+  }

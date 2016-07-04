@@ -9,13 +9,7 @@ import Update exposing (..)
 import View exposing (..)
 
 init : (Model, Cmd Msg)
-init =
-  ( {
-      cells = List.repeat 3 (List.repeat 3 initEmpty)
-    , gameState = InProgress X
-    }
-  , Cmd.none
-  )
+init = ( initialState, Cmd.none )
 
 
 -- SUBSCRIPTIONS
