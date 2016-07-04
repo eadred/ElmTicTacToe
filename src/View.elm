@@ -12,10 +12,14 @@ view : Model -> Html Msg
 view model =
   div
   [class "container"]
-  (List.map renderRow model.cells)
+  (List.indexedMap renderRow model.cells)
 
-renderRow : List CellModel -> Html Msg
-renderRow cells =
+renderRow : Int -> List CellModel -> Html Msg
+renderRow rowIndex cells =
   div
   [class "row"]
-  (List.map (cellView >> Html.App.map (always NoOp)) cells)
+  (List.indexedMap (renderRowCell rowIndex) cells)
+
+renderRowCell : Int -> Int -> CellModel -> Html Msg
+renderRowCell rowIndex colIndex cell =
+  cell |> cellView |> (Html.App.map (CellMsg rowIndex colIndex))

@@ -13,10 +13,11 @@ init =
   ( {
       cells =
         [
-          [ {status = X},{status = O},{status = Empty} ],
-          [ {status = O},{status = Empty},{status = X} ],
-          [ {status = Empty},{status = X},{status = O} ]
+          [ initEmpty, initEmpty, initEmpty ],
+          [ initEmpty, initEmpty, initEmpty ],
+          [ initEmpty, initEmpty, initEmpty ]
         ]
+    , currentTurn = X
     }
   , Cmd.none
   )

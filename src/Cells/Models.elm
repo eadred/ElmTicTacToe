@@ -3,5 +3,9 @@ module Cells.Models exposing (..)
 type alias CellModel = {status: CellStatus}
 
 type CellStatus = Empty
-                  | O
-                  | X
+                  | Played Player
+
+type Player = O | X
+
+initEmpty : CellModel
+initEmpty = {status = Empty}

@@ -1,4 +1,6 @@
 module Messages exposing (..)
 
+import Cells.Messages exposing (..)
+
 type Msg
-  = NoOp
+  = CellMsg Int Int CellMsg

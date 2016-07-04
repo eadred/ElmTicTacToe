@@ -1,9 +1,10 @@
 module Cells.Update exposing (..)
 
-import Cells.Models
-import Cells.Messages
+import Cells.Models exposing (..)
+import Cells.Messages exposing (..)
 
-update : CellMsg -> CellModel -> (CellModel, Cmd CellMsg)
-update mes curMod =
+cellUpdate : CellMsg -> CellModel -> CellModel
+cellUpdate mes curMod =
   case mes of
-    SetCell newStatus -> {curMod | status = status }
+    EndTurn player -> { curMod | status = Played player }
+    BeginTurn -> curMod
