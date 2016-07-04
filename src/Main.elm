@@ -1,21 +1,12 @@
 
 module Main exposing (..)
 
-import Html exposing (..)
 import Html.App
-import Html.Attributes exposing (..)
 import Cells.Models exposing (..)
-import Cells.View exposing (..)
-
-
--- MODEL
-
-
-type alias Model =
-  {
-  cells : List (List CellModel)
-  }
-
+import Models exposing (..)
+import Messages exposing (..)
+import Update exposing (..)
+import View exposing (..)
 
 init : (Model, Cmd Msg)
 init =
@@ -31,38 +22,7 @@ init =
   )
 
 
--- UPDATE
-
-
-type Msg
-  = NoOp
-
-
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
-    NoOp ->
-      (model, Cmd.none)
-
-
--- VIEW
-
-
-view : Model -> Html Msg
-view model =
-  div
-  []
-  (List.map renderRow model.cells)
-
-renderRow : List CellModel -> Html Msg
-renderRow cells =
-  div
-  []
-  (List.map (cellView >> Html.App.map (always NoOp)) cells)
-
-
 -- SUBSCRIPTIONS
-
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
