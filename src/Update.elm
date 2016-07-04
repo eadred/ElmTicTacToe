@@ -10,11 +10,11 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     CellMsg rowIdx colIdx cellMsg ->
-      case cellMsg of
-        BeginTurn ->
-          let newCells = updateGridElem (cellUpdate (EndTurn model.currentTurn)) rowIdx colIdx model.cells in
-          ({model | cells = newCells, currentTurn = toggleTurn model.currentTurn}, Cmd.none)
-        _ -> (model, Cmd.none)
+      case (cellMsg, model.gameState) of
+        (BeginTurn, InProgress currentTurn) ->
+          let newCells = updateGridElem (cellUpdate (EndTurn currentTurn)) rowIdx colIdx model.cells in
+          ({model | cells = newCells, gameState = (gameState currentTurn newCells)}, Cmd.none)
+        (_, _) -> (model, Cmd.none)
 
 toggleTurn : Player -> Player
 toggleTurn p =
@@ -33,3 +33,9 @@ updateListElem f idx lst =
     (_, []) -> []
     (0, (x::xs)) -> (f x)::xs
     (n, (x::xs)) -> x :: (updateListElem f (n-1) xs)
+
+gameState : Player -> List (List CellModel) -> GameState
+gameState lastPlayer cells =
+  case cells |> List.concat |> (List.any isCellEmpty) of
+    True -> InProgress (toggleTurn lastPlayer)
+    False -> Finished

@@ -12,7 +12,7 @@ init : (Model, Cmd Msg)
 init =
   ( {
       cells = List.repeat 3 (List.repeat 3 initEmpty)
-    , currentTurn = X
+    , gameState = InProgress X
     }
   , Cmd.none
   )

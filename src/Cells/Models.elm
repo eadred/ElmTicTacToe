@@ -7,6 +7,12 @@ type CellStatus = Empty
 
 type Player = O | X
 
+isCellEmpty : CellModel -> Bool
+isCellEmpty cm =
+  case cm.status of
+    Empty -> True
+    _ -> False
+
 initEmpty : CellModel
 initEmpty = {status = Empty}
 

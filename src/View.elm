@@ -19,7 +19,14 @@ view model =
 
 statusView : Model -> Html Msg
 statusView model =
-  div [ class "h3 status" ] [text ("Player " ++ (playerText model.currentTurn) ++ "'s turn")]
+  let render txt =
+    div [ class "h3 status" ] [text txt] in
+  case model.gameState of
+    InProgress currentTurn ->
+      render ("Player " ++ (playerText currentTurn) ++ "'s turn")
+    Finished ->
+      render "Finished"
+
 
 boardView : Model -> Html Msg
 boardView model =

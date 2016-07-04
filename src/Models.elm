@@ -5,5 +5,9 @@ import Cells.Models exposing (..)
 type alias Model =
   {
     cells : List (List CellModel)
-  , currentTurn : Player
+  , gameState : GameState
   }
+
+type GameState =
+  InProgress Player
+  | Finished
