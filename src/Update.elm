@@ -5,6 +5,7 @@ import Messages exposing (..)
 import Cells.Update exposing (..)
 import Cells.Messages exposing (..)
 import Cells.Models exposing (..)
+import GameLogic exposing (..)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -37,6 +38,28 @@ updateListElem f idx lst =
 
 gameState : Player -> List (List CellModel) -> GameState
 gameState lastPlayer cells =
-  case cells |> List.concat |> (List.any isCellEmpty) of
-    True -> InProgress (toggleTurn lastPlayer)
-    False -> Finished
+  case calculateWinner cells of
+    Just p -> Finished --If someone has won the game is finished
+    Nothing -> --Otherwise check to see if the board is full
+      case cells |> List.concat |> (List.any isCellEmpty) of
+        True -> InProgress (toggleTurn lastPlayer)
+        False -> Finished
+
+calculateWinner : List (List CellModel) -> Maybe Player
+calculateWinner cells =
+  cells
+  |> List.indexedMap mapColumns
+  |> List.concat
+  |> List.map cellStatusToPlays
+  |> List.concat
+  |> checkWinner
+
+mapColumns : Int -> List CellModel -> List (Int, Int, CellStatus)
+mapColumns rowIndex columns =
+  List.indexedMap (\colIndex cModel -> (rowIndex, colIndex, cModel.status)) columns
+
+cellStatusToPlays : (Int, Int, CellStatus) -> List Play
+cellStatusToPlays tuple =
+  case tuple of
+    (_, _, Empty) -> []
+    (r, c, (Played p)) -> [{player = p, row = r, col = c}]
