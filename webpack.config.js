@@ -59,7 +59,7 @@ if (TARGET_ENV === 'development') {
           loader: 'elm-hot!elm-webpack?verbose=true&warn=true'
         },
         {
-          test: /\.(css|scss)$/, 
+          test: /\.(css|scss)$/,
           loaders: ['style', 'css', 'postcss', 'sass']
         }
       ]
@@ -72,7 +72,6 @@ if (TARGET_ENV === 'production') {
   console.log('Building for prod...');
   module.exports = merge(commonConfig, {
     entry: [
-      'bootstrap-loader',
       path.join(__dirname, 'static/index.js')
     ],
     module: {
