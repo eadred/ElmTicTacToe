@@ -9,3 +9,9 @@ type Player = O | X
 
 initEmpty : CellModel
 initEmpty = {status = Empty}
+
+playerText : Player -> String
+playerText p =
+  case p of
+    O -> "O"
+    X -> "X"

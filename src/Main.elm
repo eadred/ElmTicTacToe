@@ -11,12 +11,7 @@ import View exposing (..)
 init : (Model, Cmd Msg)
 init =
   ( {
-      cells =
-        [
-          [ initEmpty, initEmpty, initEmpty ],
-          [ initEmpty, initEmpty, initEmpty ],
-          [ initEmpty, initEmpty, initEmpty ]
-        ]
+      cells = List.repeat 3 (List.repeat 3 initEmpty)
     , currentTurn = X
     }
   , Cmd.none

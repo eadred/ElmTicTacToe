@@ -10,8 +10,8 @@ cellView : CellModel -> Html CellMsg
 cellView model =
   case model.status of
     Empty -> renderEmptyCell
-    Played O -> renderFilledCell "cell-o" "O"
-    Played X -> renderFilledCell "cell-x" "X"
+    Played O -> renderFilledCell "cell-o" (playerText O)
+    Played X -> renderFilledCell "cell-x" (playerText X)
 
 renderEmptyCell : Html CellMsg
 renderEmptyCell =

@@ -10,6 +10,19 @@ import Cells.View exposing (..)
 
 view : Model -> Html Msg
 view model =
+  div []
+  [
+    h1 [ class "title" ] [text "Tic Tac Toe"],
+    statusView model,
+    boardView model
+  ]
+
+statusView : Model -> Html Msg
+statusView model =
+  div [ class "h3 status" ] [text ("Player " ++ (playerText model.currentTurn) ++ "'s turn")]
+
+boardView : Model -> Html Msg
+boardView model =
   div
   [class "container"]
   (List.indexedMap renderRow model.cells)
