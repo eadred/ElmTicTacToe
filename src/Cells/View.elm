@@ -8,12 +8,18 @@ import Cells.Messages exposing (..)
 cellView : CellModel -> Html CellMsg
 cellView model =
   case model.status of
-    Empty -> renderCell ""
-    O -> renderCell "O"
-    X -> renderCell "X"
+    Empty -> renderEmptyCell
+    O -> renderFilledCell "cell-o" "O"
+    X -> renderFilledCell "cell-x" "X"
 
-renderCell : String -> Html CellMsg
-renderCell content =
+renderEmptyCell : Html CellMsg
+renderEmptyCell =
   div
   [class "col-xs-1"]
-  [ button [class "btn cell"] [text content] ]
+  [ button [class "btn cell cell-empty"] [] ]
+
+renderFilledCell : String -> String -> Html CellMsg
+renderFilledCell cellClass content =
+  div
+  [class "col-xs-1"]
+  [ div [class ("btn cell " ++ cellClass)] [text content] ]
