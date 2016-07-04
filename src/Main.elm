@@ -1,11 +1,11 @@
 
 module Main exposing (..)
 
--- Elm Core
 import Html exposing (..)
 import Html.App
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Cells.Models exposing (..)
+import Cells.View exposing (..)
 
 
 -- MODEL
@@ -13,12 +13,19 @@ import Html.Events exposing (..)
 
 type alias Model =
   {
+  cells : List (List CellModel)
   }
 
 
 init : (Model, Cmd Msg)
 init =
   ( {
+      cells =
+        [
+          [ {status = X},{status = O},{status = Empty} ],
+          [ {status = O},{status = Empty},{status = X} ],
+          [ {status = Empty},{status = X},{status = O} ]
+        ]
     }
   , Cmd.none
   )
@@ -45,9 +52,13 @@ view : Model -> Html Msg
 view model =
   div
   []
-  [ img [ src "/img/elm.png" ] []
-  , text "Hello world"
-  ]
+  (List.map renderRow model.cells)
+
+renderRow : List CellModel -> Html Msg
+renderRow cells =
+  div
+  []
+  (List.map (cellView >> Html.App.map (always NoOp)) cells)
 
 
 -- SUBSCRIPTIONS
