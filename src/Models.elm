@@ -10,7 +10,8 @@ type alias Model =
 
 type GameState =
   InProgress Player
-  | Finished
+  | Win Player
+  | Draw
 
 initialState : Model
 initialState =

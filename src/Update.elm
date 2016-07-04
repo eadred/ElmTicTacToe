@@ -39,11 +39,11 @@ updateListElem f idx lst =
 gameState : Player -> List (List CellModel) -> GameState
 gameState lastPlayer cells =
   case calculateWinner cells of
-    Just p -> Finished --If someone has won the game is finished
-    Nothing -> --Otherwise check to see if the board is full
+    Just p -> Win p -- Someone has won
+    Nothing ->
       case cells |> List.concat |> (List.any isCellEmpty) of
-        True -> InProgress (toggleTurn lastPlayer)
-        False -> Finished
+        True -> InProgress (toggleTurn lastPlayer) -- It's the next player's turn
+        False -> Draw -- The board is full so it's a draw
 
 calculateWinner : List (List CellModel) -> Maybe Player
 calculateWinner cells =

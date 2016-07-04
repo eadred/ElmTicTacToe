@@ -26,14 +26,16 @@ statusView model =
   case model.gameState of
     InProgress currentTurn ->
       render ("Player " ++ (playerText currentTurn) ++ "'s turn")
-    Finished ->
-      render "Finished"
+    Win p ->
+      render ("Player " ++ (playerText p) ++ " wins!")
+    Draw ->
+      render "Draw"
 
 restartView : Model -> Html Msg
 restartView model =
   case model.gameState of
     InProgress _ -> div [] []
-    Finished ->
+    _ ->
       div
         [class "container"]
         [button [class "btn col-xs-1 restart", onClick Reset] [text "Restart"]]
