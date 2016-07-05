@@ -1,4 +1,4 @@
-module Cells.View exposing (..)
+module Cells.View exposing (cellView)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -12,6 +12,8 @@ cellView model =
     Empty -> renderEmptyCell
     Played O -> renderFilledCell "cell-o" (playerText O)
     Played X -> renderFilledCell "cell-x" (playerText X)
+
+-- Internal functions
 
 renderEmptyCell : Html CellMsg
 renderEmptyCell =

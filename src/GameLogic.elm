@@ -1,4 +1,4 @@
-module GameLogic exposing (..)
+module GameLogic exposing (Play,checkWinner)
 
 import Cells.Models exposing (..)
 
@@ -7,6 +7,8 @@ type alias Play = {player:Player, row:Int, col:Int}
 checkWinner : List Play -> Maybe Player
 checkWinner plays = let winners = lift2 (playerHasLine plays) [X, O] (diagonalChecks ++ straightLineChecks) in
                     Maybe.oneOf winners
+
+-- Internal functions
 
 playerHasLine : List Play -> Player -> (Play -> Bool) -> Maybe Player
 playerHasLine plays player isOnLine =

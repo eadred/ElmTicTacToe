@@ -1,4 +1,4 @@
-module View exposing (..)
+module View exposing (view)
 
 import Html exposing (..)
 import Html.App
@@ -18,6 +18,8 @@ view model =
     boardView model,
     restartView model
   ]
+
+-- Internal functions
 
 statusView : Model -> Html Msg
 statusView model =

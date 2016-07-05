@@ -1,4 +1,4 @@
-module Update exposing (..)
+module Update exposing (update)
 
 import Models exposing (..)
 import Messages exposing (..)
@@ -17,6 +17,8 @@ update msg model =
           let newCells = updateGridElem (cellUpdate (EndTurn currentTurn)) rowIdx colIdx model.cells in
           ({model | cells = newCells, gameState = (gameState currentTurn newCells)}, Cmd.none)
         (_, _) -> (model, Cmd.none)
+
+-- Internal functions
 
 toggleTurn : Player -> Player
 toggleTurn p =
