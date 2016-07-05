@@ -1,15 +1,13 @@
 module TestMain exposing (..)
 
 import ElmTest exposing (..)
+import GameLogicTests
 
 tests : Test
 tests =
-    suite "A Test Suite"
-        [ test "Addition" (assertEqual (3 + 7) 10)
-        , test "Dummy test" (assert True)
-        ]
-
+  suite "All tests"
+  [ GameLogicTests.tests
+  ]
 
 main : Program Never
-main =
-    runSuite tests
+main = runSuite tests
