@@ -3,7 +3,10 @@
     "start": "webpack-dev-server --hot --inline --content-base static/",
     "build": "rimraf dist && webpack",
     "serve": "static dist",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "test-build": "elm make test/TestMain.elm --output test/TestMain.js",
+    "test-run": "node test/TestMain.js",
+    "test": "npm run -s test-build & npm run -s test-run"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
