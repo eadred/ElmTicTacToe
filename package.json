@@ -4,8 +4,8 @@
     "build": "rimraf dist && webpack",
     "serve": "static dist",
     "watch": "webpack --watch",
-    "test-build": "elm make test/TestMain.elm --output test/TestMain.js",
-    "test-run": "node test/TestMain.js",
+    "test-build": "elm make test/TestMain.elm --output test/dist/TestMain.js",
+    "test-run": "node test/dist/TestMain.js",
     "test": "npm run -s test-build & npm run -s test-run"
   },
   "devDependencies": {
