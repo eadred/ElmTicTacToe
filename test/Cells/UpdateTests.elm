@@ -4,6 +4,7 @@ import ElmTest exposing (..)
 import Check as C
 import Check.Producer as P
 import Check.Test as T
+import Utils as U
 import Cells.Models exposing (..)
 import Cells.Messages exposing (..)
 import Cells.Update exposing (..)
@@ -13,12 +14,7 @@ playerProducer = P.bool |> P.map (\b -> if b then X else O)
 
 cellProducer : P.Producer CellModel
 cellProducer =
-  let choose i =
-    case i of
-      0 -> Empty
-      1 -> Played O
-      _ -> Played X in
-  P.rangeInt 0 2 |> P.map (\i -> {status = choose i})
+  U.oneOf [U.const Empty, playerProducer |> P.map Played] |> P.map CellModel
 
 handleBeginTurn : C.Claim
 handleBeginTurn =
